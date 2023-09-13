@@ -1,0 +1,37 @@
+** Instalar a CLI gcloud
+
+Install-Module GoogleCloud
+Set-ExecutionPolicy RemoteSigned
+gcloud components install gke-gcloud-auth-plugin
+gcloud auth login
+
++++++++++++++++++++++++++++++++++++
+
+FROM httpd:latest
+WORKDIR /usr/local/apache2/htdocs/
+COPY index.html /usr/local/apache2/htdocs
+
+EXPOSE 80
+
+
+++++++++++++++++++++++++++++++++++++
+
+docker login
+
+docker build . -t denilsonbonatti/atlantico:1.0
+docker push denilsonbonatti/atlantico:1.0
+
+
++++++++++++++++++++++++++++++++++++++++++++
+
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+
+
+++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f appv1.yml --record
+
+kubctl rollout history deployment httpd
+kubctl rollout undo deployment httpd --to-revision=1

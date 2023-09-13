@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlantico-deployment
+  labels:
+    app: app-html
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: app-html
+  template:
+    metadata:
+      labels:
+        app: app-html
+    spec:
+      containers:
+      - name: app-html
+        image: denilsonbonatti/atlantico:1.1
+        ports:
+        - containerPort: 80
